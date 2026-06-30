@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Noto+Sans+KR:wght@400;500;600;700&family=Nanum+Pen+Script&display=swap');
+
+:root {
+  --bg: #f4f1eb;
+  --ink: #1a1a18;
+  --accent: #b5451b;
+  --olive: #6b6b5a;
+  --soft-border: #d5d0c8;
+  --white: #ffffff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.font-serif {
+  font-family: 'Playfair Display', Georgia, 'Nanum Myeongjo', serif;
+}
+
+.editorial-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+@media (min-width: 640px) {
+  .editorial-title {
+    font-size: 2.5rem;
+  }
+}
+
+.editorial-subtitle {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #A8652A;
+  margin-top: 0.4rem;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.editorial-btn-primary {
+  background: var(--ink);
+  color: var(--white);
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.editorial-btn-primary:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.editorial-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.editorial-quote {
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.25rem;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: #A8652A;
+  background: var(--white);
+  border: 1px solid var(--soft-border);
+  border-left: 4px solid var(--accent);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input, textarea, button {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.search-handwriting {
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 1rem;
+}
+.search-handwriting::placeholder {
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 1rem;
+}
+.search-label-handwriting {
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: none;
+}
