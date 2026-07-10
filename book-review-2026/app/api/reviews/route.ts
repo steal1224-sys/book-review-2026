@@ -48,7 +48,12 @@ async function getReviews(): Promise<Review[]> {
   try {
     const reviews = await kv.get<Review[]>(KV_KEY);
     if (!reviews || reviews.length === 0) return SAMPLE_REVIEWS;
-    return reviews;
+  const seen = new Set<number>();
+    return reviews.filter((r) => {
+      if (seen.has(r.id)) return false;
+      seen.add(r.id);
+      return true;
+    });
   } catch {
     return SAMPLE_REVIEWS;
   }
@@ -76,7 +81,7 @@ export async function POST(req: Request) {
 
     const reviews = await getReviews();
     const newReview: Review = {
-      id: Date.now(),
+      id: Date.now() * 1000 + Math.floor(Math.random() * 1000),
       bookTitle,
       author,
       student,
