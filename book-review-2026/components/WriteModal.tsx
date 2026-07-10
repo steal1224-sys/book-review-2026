@@ -45,6 +45,7 @@ export function WriteModal({ onSubmit, onClose }: Props) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (submitting) return;
     if (!form.bookTitle.trim() || !form.author.trim() || !form.student.trim() || !form.content.trim()) {
       setError("필수 항목(*)을 모두 입력해 주세요.");
       return;
