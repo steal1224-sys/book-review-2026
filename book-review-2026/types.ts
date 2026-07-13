@@ -22,3 +22,14 @@ export interface Review {
 }
 
 export type FilterType = "all" | "public" | "private";
+
+export interface BookSeed {
+  id: number;
+  bookTitle: string;
+  author: string;
+  publishYear: string;
+  coverImageUrl?: string;
+  keyword: string;
+  relatedSentence: string;
+  createdAt: string;
+}
