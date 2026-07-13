@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { WriteModal } from "@/components/WriteModal";
 import { ReviewCard } from "@/components/ReviewCard";
 import { PasswordModal } from "@/components/PasswordModal";
+import { AdminLoginModal } from "@/components/AdminLoginModal";
+import { AdminPanel } from "@/components/AdminPanel";
 import { Review, FilterType } from "@/types";
 
 export default function App() {
@@ -13,6 +15,9 @@ export default function App() {
   const [writing, setWriting] = useState(false);
   const [askingPassword, setAskingPassword] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
+  const [askingAdminPassword, setAskingAdminPassword] = useState(false);
+  const [adminAuthenticated, setAdminAuthenticated] = useState(false);
+  const [adminPanelOpen, setAdminPanelOpen] = useState(false);
   const [filter, setFilter] = useState<FilterType>("all");
   const [search, setSearch] = useState("");
 
@@ -48,6 +53,20 @@ export default function App() {
     setAuthenticated(true);
     setAskingPassword(false);
     setWriting(true);
+  }
+
+  function handleAdminClick() {
+    if (adminAuthenticated) {
+      setAdminPanelOpen(true);
+    } else {
+      setAskingAdminPassword(true);
+    }
+  }
+
+  function handleAdminPasswordSuccess() {
+    setAdminAuthenticated(true);
+    setAskingAdminPassword(false);
+    setAdminPanelOpen(true);
   }
 
   const filtered = reviews.filter((r) => {
@@ -212,8 +231,14 @@ export default function App() {
           </section>
         </main>
 
-        <footer className="border-t border-[var(--soft-border)] mt-12 pt-6 text-center text-[10px] text-[#aaa] tracking-widest uppercase">
+        <footer className="border-t border-[var(--soft-border)] mt-12 pt-6 flex flex-col items-center gap-3 text-center text-[10px] text-[#aaa] tracking-widest uppercase">
           MORANGLSAM LITERARY SOCIETY &copy; 2026 &nbsp;|&nbsp; 2026 서평단 북리뷰
+          <button
+            onClick={handleAdminClick}
+            className="text-[10px] tracking-widest uppercase text-[#aaa] hover:text-[var(--ink)] transition-colors normal-case"
+          >
+            🔑 사서교사 관리
+          </button>
         </footer>
       </div>
 
@@ -224,6 +249,13 @@ export default function App() {
         />
       )}
       {writing && <WriteModal onSubmit={addReview} onClose={() => setWriting(false)} />}
+      {askingAdminPassword && (
+        <AdminLoginModal
+          onSuccess={handleAdminPasswordSuccess}
+          onClose={() => setAskingAdminPassword(false)}
+        />
+      )}
+      {adminPanelOpen && <AdminPanel onClose={() => setAdminPanelOpen(false)} />}
     </div>
   );
 }
